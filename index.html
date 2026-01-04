@@ -22,7 +22,7 @@
                 <div class="header-left">
                     <div class="header-label">Proxen</div>
                     <div class="header-divider"></div>
-                    <div class="header-version">v1.0</div>
+                    <div class="header-version clickable" id="version-btn" title="View changelog">v1.1</div>
                 </div>
                 <button id="reset-btn" class="reset-btn hidden" title="Clear all data and reset">
                     Reset System
@@ -58,8 +58,45 @@
                             </p>
                         </div>
 
+                        <!-- COLLAPSIBLE TRANSPARENCY SECTION (v1.1) -->
                         <div class="landing-section">
-                            <h2 class="section-title">How it works</h2>
+                            <div class="collapsible-header" id="transparency-toggle">
+                                <h2 class="section-title">How does this work?</h2>
+                                <span class="collapse-icon">▼</span>
+                            </div>
+                            <div class="collapsible-content" id="transparency-content">
+                                <div class="transparency-grid">
+                                    <div class="transparency-item">
+                                        <span class="transparency-label">AI Model:</span>
+                                        <span class="transparency-value">Gemma 3 27B IT (Google)</span>
+                                    </div>
+                                    <div class="transparency-item">
+                                        <span class="transparency-label">API Endpoint:</span>
+                                        <span class="transparency-value">generativelanguage.googleapis.com</span>
+                                    </div>
+                                    <div class="transparency-item">
+                                        <span class="transparency-label">Data Flow:</span>
+                                        <span class="transparency-value">Browser → Google API → Browser</span>
+                                    </div>
+                                    <div class="transparency-item">
+                                        <span class="transparency-label">Proxen's Access:</span>
+                                        <span class="transparency-value">None. No data passes through Proxen servers.</span>
+                                    </div>
+                                    <div class="transparency-item">
+                                        <span class="transparency-label">Storage:</span>
+                                        <span class="transparency-value">Local device only (browser localStorage)</span>
+                                    </div>
+                                </div>
+                                <div class="transparency-footer">
+                                    <button onclick="app.showTechnicalDetails()" class="link-button">
+                                        View Full Technical Details →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="landing-section">
+                            <h2 class="section-title">Functionalities</h2>
                             <ul class="feature-list">
                                 <li class="feature-item">
                                     <span class="feature-arrow">→</span>
@@ -119,9 +156,17 @@
 
                         <div class="landing-footer">
                             <p class="footer-text">
-                                This is version 1. It does one thing: helps you externalize and complete tasks 
-                                without feeling alone. Nothing more, nothing less.
+                                <strong>Early-Stage Project:</strong> This is version 1.1. Transparency and verifiability 
+                                are ongoing priorities. This app does not collect or transmit data to Proxen servers, 
+                                but it cannot protect against compromised browsers, malicious extensions, or stolen devices.
                             </p>
+                            <div class="footer-links">
+                                <button onclick="app.showPrivacy()" class="link-button">Privacy & Data</button>
+                                <span class="footer-divider">•</span>
+                                <button onclick="app.showThreatModel()" class="link-button">Threat Model</button>
+                                <span class="footer-divider">•</span>
+                                <a href="https://github.com/xensenx/Proxen" target="_blank" class="link-button">Source Code</a>
+                            </div>
                         </div>
                     </div>
 
@@ -155,7 +200,7 @@
                         and is only sent directly to Google's API when you interact with the AI.
                     </p>
                     <p class="section-text muted">
-                        We never see your key. We never handle your requests. This is direct communication 
+                        Proxen does not see your key. Proxen does not handle your requests. This is direct communication 
                         between your browser and Google's servers.
                     </p>
                 </div>
@@ -179,7 +224,7 @@
                                class="form-link">
                                 Get a key from Google AI Studio →
                             </a>
-                            <button onclick="app.openTestModal()" class="form-link test-link">
+                            <button onclick="app.showTestModal()" class="form-link test-link">
                                 Test your API key first →
                             </button>
                         </div>
@@ -191,10 +236,50 @@
                         Invalid key format. Check the key and try again.
                     </p>
                 </div>
+
+                <!-- API KEY SCOPE DETAILS (v1.1) - Below the form -->
+                <div class="api-scope-details">
+                    <button class="scope-toggle" id="scope-toggle">
+                        <span class="scope-toggle-text">What will this API key be used for?</span>
+                        <span class="scope-toggle-icon">▼</span>
+                    </button>
+                    <div class="scope-content hidden" id="scope-content">
+                        <div class="scope-grid">
+                            <div class="scope-item">
+                                <span class="scope-label">Model:</span>
+                                <span class="scope-value">Gemma 3 27B IT (Instruction Tuned)</span>
+                            </div>
+                            <div class="scope-item">
+                                <span class="scope-label">Endpoint:</span>
+                                <span class="scope-value">generativelanguage.googleapis.com/v1beta/models/gemma-3-27b-it:generateContent</span>
+                            </div>
+                            <div class="scope-item">
+                                <span class="scope-label">Purpose:</span>
+                                <span class="scope-value">Text generation for task management (inference only)</span>
+                            </div>
+                            <div class="scope-item">
+                                <span class="scope-label">Not Used For:</span>
+                                <span class="scope-value">Fine-tuning, training, data storage, or analytics</span>
+                            </div>
+                            <div class="scope-item">
+                                <span class="scope-label">Transmission:</span>
+                                <span class="scope-value">Sent directly from browser to Google (never through Proxen)</span>
+                            </div>
+                            <div class="scope-item">
+                                <span class="scope-label">Billing:</span>
+                                <span class="scope-value">The Ai model we use comes under free-tier and does not require any billing</span>
+                            </div>
+                        </div>
+                        <div class="scope-recommendation">
+                            <strong>Recommendation:</strong> Create a restricted or project-specific API key. 
+                            You can manage keys at <a href="https://aistudio.google.com/app/apikey" target="_blank" class="inline-link">Google AI Studio</a>.
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- API Test Modal -->
+        <!-- API TEST MODAL -->
         <div id="test-modal" class="modal hidden">
             <div class="modal-overlay" onclick="app.closeTestModal()"></div>
             <div class="modal-content">
@@ -214,6 +299,264 @@
                         Run Test
                     </button>
                     <div id="test-results" class="test-results hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TECHNICAL DETAILS MODAL (v1.1) -->
+        <div id="technical-modal" class="modal hidden">
+            <div class="modal-overlay" onclick="app.closeTechnicalModal()"></div>
+            <div class="modal-content modal-large">
+                <div class="modal-header">
+                    <h3 class="modal-title">Technical Details & Data Flow</h3>
+                    <button class="modal-close" onclick="app.closeTechnicalModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <section class="info-section">
+                        <h4 class="info-subtitle">Data Flow</h4>
+                        <div class="data-flow-diagram">
+                            <div class="flow-step">Your Browser</div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-step">Google AI API</div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-step">Your Browser</div>
+                        </div>
+                        <p class="info-text">
+                            When you send a message, your browser makes a direct HTTPS request to Google's API. 
+                            The response returns directly to your browser. Proxen's servers 
+                            are not part of this chain.
+                        </p>
+                    </section>
+
+                    <section class="info-section">
+                        <h4 class="info-subtitle">What Proxen Does Not Do</h4>
+                        <ul class="info-list">
+                            <li>Does not log requests or responses</li>
+                            <li>Does not store messages on any server</li>
+                            <li>Does not forward data to third parties</li>
+                            <li>Does not perform analytics or telemetry</li>
+                            <li>Does not use your data for fine-tuning or training</li>
+                            <li>Does not create user accounts or profiles</li>
+                            <li>Does not track you across sessions or devices</li>
+                        </ul>
+                    </section>
+
+                    <section class="info-section">
+                        <h4 class="info-subtitle">Local Storage Details</h4>
+                        <p class="info-text">
+                            Proxen stores the following in your browser's <code>localStorage</code>:
+                        </p>
+                        <ul class="info-list">
+                            <li><strong>API Key:</strong> Your Google API key (encrypted by browser, not by Proxen)</li>
+                            <li><strong>Username:</strong> The name you provide for personalization</li>
+                            <li><strong>Tasks:</strong> Your task list and completion status</li>
+                            <li><strong>Conversation History:</strong> Last 6 messages for context (stored locally only)</li>
+                        </ul>
+                        <p class="info-text">
+                            This data never leaves your device. It is not synced to any cloud service by Proxen.
+                        </p>
+                    </section>
+
+                    <section class="info-section">
+                        <h4 class="info-subtitle">Verification</h4>
+                        <p class="info-text">You can verify this behavior by:</p>
+                        <ul class="info-list">
+                            <li>Opening browser DevTools (F12) and monitoring the Network tab</li>
+                            <li>Confirming all API requests go to generativelanguage.googleapis.com</li>
+                            <li>Reviewing the source code at <a href="https://github.com/xensenx/Proxen" target="_blank" class="inline-link">github.com/xensenx/Proxen</a></li>
+                            <li>Inspecting localStorage in DevTools → Application → Local Storage</li>
+                        </ul>
+                    </section>
+
+                    <section class="info-section">
+                        <h4 class="info-subtitle">Source Code & Contact</h4>
+                        <p class="info-text">
+                            <strong>Repository:</strong> <a href="https://github.com/xensenx/Proxen" target="_blank" class="inline-link">github.com/xensenx/Proxen</a><br>
+                            <strong>Creator:</strong> <a href="https://github.com/xensenx" target="_blank" class="inline-link">github.com/xensenx</a>
+                        </p>
+                        <p class="info-text">
+                            The deployed version corresponds to the public repository. You can compare deployed 
+                            code against the repository to verify this claim.
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRIVACY MODAL (v1.1) -->
+        <div id="privacy-modal" class="modal hidden">
+            <div class="modal-overlay" onclick="app.closePrivacyModal()"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Privacy & Data Handling</h3>
+                    <button class="modal-close" onclick="app.closePrivacyModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <section class="info-section">
+                        <h4 class="info-subtitle">What Data Is Stored</h4>
+                        <p class="info-text">Proxen stores the following on your device only:</p>
+                        <ul class="info-list">
+                            <li>Your Google API key</li>
+                            <li>Your chosen username</li>
+                            <li>Your task list</li>
+                            <li>Recent conversation context (last 6 messages)</li>
+                        </ul>
+                    </section>
+
+                    <section class="info-section">
+                        <h4 class="info-subtitle">Where It Is Stored</h4>
+                        <p class="info-text">
+                            All data is stored in your browser's <code>localStorage</code> on this device. 
+                            It does not sync to any cloud service operated by Proxen.
+                        </p>
+                    </section>
+
+                    <section class="info-section">
+                        <h4 class="info-subtitle">What Data Is Never Collected</h4>
+                        <ul class="info-list">
+                            <li>Email addresses or contact information</li>
+                            <li>IP addresses or location data</li>
+                            <li>Usage analytics or telemetry</li>
+                            <li>Device fingerprints</li>
+                            <li>Browsing history</li>
+                            <li>Any personally identifiable information</li>
+                        </ul>
+                    </section>
+
+                    <section class="info-section">
+                        <h4 class="info-subtitle">Third-Party Data Sharing</h4>
+                        <p class="info-text">
+                            When you interact with the AI, your messages are sent directly to Google's API. 
+                            Google's privacy policy applies to that interaction. Proxen does not receive copies 
+                            of these messages.
+                        </p>
+                    </section>
+
+                    <section class="info-section">
+                        <h4 class="info-subtitle">How to Remove All Data</h4>
+                        <p class="info-text">To completely remove all Proxen data from your device:</p>
+                        <ol class="info-list numbered">
+                            <li>Click "Reset System" in the header, or</li>
+                            <li>Clear your browser's localStorage manually in DevTools, or</li>
+                            <li>Clear your browser's site data for this domain</li>
+                        </ol>
+                        <p class="info-text">
+                            After removal, no trace of Proxen data remains on your device.
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- THREAT MODEL MODAL (v1.1) -->
+        <div id="threat-modal" class="modal hidden">
+            <div class="modal-overlay" onclick="app.closeThreatModal()"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Threat Model</h3>
+                    <button class="modal-close" onclick="app.closeThreatModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <section class="info-section">
+                        <h4 class="info-subtitle protected">What Proxen Protects Against</h4>
+                        <ul class="info-list">
+                            <li><strong>Server breaches:</strong> There are no Proxen servers to breach</li>
+                            <li><strong>Account database leaks:</strong> There are no user accounts</li>
+                            <li><strong>Third-party tracking:</strong> No analytics or tracking scripts</li>
+                            <li><strong>Data mining:</strong> Proxen cannot access or analyze your data</li>
+                            <li><strong>Cross-device profiling:</strong> Data never leaves your device</li>
+                        </ul>
+                    </section>
+
+                    <section class="info-section">
+                        <h4 class="info-subtitle vulnerable">What Proxen Does Not Protect Against</h4>
+                        <ul class="info-list">
+                            <li><strong>Compromised browsers:</strong> If your browser is compromised, all local data is at risk</li>
+                            <li><strong>Malicious browser extensions:</strong> Extensions can read localStorage and intercept requests</li>
+                            <li><strong>Stolen or unlocked devices:</strong> Anyone with physical access can access your data</li>
+                            <li><strong>Network interception:</strong> While HTTPS protects in transit, compromised networks may pose risks</li>
+                            <li><strong>Google API vulnerabilities:</strong> Proxen relies on Google's security</li>
+                        </ul>
+                    </section>
+
+                    <section class="info-section">
+                        <h4 class="info-subtitle">Honest Assessment</h4>
+                        <p class="info-text">
+                            Proxen's architecture minimizes certain risks by not operating servers or storing data centrally. 
+                            However, this does not make it immune to all threats. The weakest links are:
+                        </p>
+                        <ul class="info-list">
+                            <li>Your device's security</li>
+                            <li>Your browser's integrity</li>
+                            <li>The security of Google's API</li>
+                        </ul>
+                        <p class="info-text">
+                            Proxen cannot protect against these threats. If any of these are compromised, your data may be at risk.
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHANGELOG MODAL (v1.1) -->
+        <div id="changelog-modal" class="modal hidden">
+            <div class="modal-overlay" onclick="app.closeChangelogModal()"></div>
+            <div class="modal-content modal-large">
+                <div class="modal-header">
+                    <h3 class="modal-title">Version History</h3>
+                    <button class="modal-close" onclick="app.closeChangelogModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <section class="changelog-section">
+                        <div class="version-header">
+                            <h4 class="version-number">v1.1</h4>
+                            <span class="version-date">Current</span>
+                        </div>
+                        <h5 class="version-subtitle">Transparency & Trust Update</h5>
+                        <ul class="changelog-list">
+                            <li>Added collapsible transparency section on landing page</li>
+                            <li>Added detailed technical documentation modal</li>
+                            <li>Added explicit API key scope explanation</li>
+                            <li>Added Privacy & Data Handling page</li>
+                            <li>Added Threat Model documentation</li>
+                            <li>Added public source code links and creator information</li>
+                            <li>Added interactive changelog (you're reading it)</li>
+                            <li>Added early-stage project disclosure</li>
+                            <li>Improved UI/UX with centered modals and better spacing</li>
+                        </ul>
+                    </section>
+
+                    <section class="changelog-section">
+                        <div class="version-header">
+                            <h4 class="version-number">v1.0</h4>
+                            <span class="version-date">Initial Release</span>
+                        </div>
+                        <h5 class="version-subtitle">Core Functionality</h5>
+                        <ul class="changelog-list">
+                            <li>Natural language task management interface</li>
+                            <li>Gemma 3 27B IT integration via Google API</li>
+                            <li>Local-first architecture with no server dependencies</li>
+                            <li>Task creation, completion, and deletion via conversation</li>
+                            <li>Smart intent detection and context awareness</li>
+                            <li>Inline task updates with visual connections</li>
+                            <li>Momentum tracking and appropriate AI responses</li>
+                        </ul>
+                    </section>
+
+                    <section class="changelog-section roadmap">
+                        <h4 class="roadmap-title">Planned Improvements</h4>
+                        <ul class="changelog-list">
+                            <li>Enhanced error recovery and retry logic</li>
+                            <li>Task prioritization and scheduling features</li>
+                            <li>Export functionality for task data</li>
+                            <li>Improved mobile experience</li>
+                            <li>Optional task categories and tags</li>
+                            <li>Continued transparency and security improvements</li>
+                        </ul>
+                        <p class="roadmap-note">
+                            Note: This roadmap is subject to change based on user feedback and technical constraints.
+                        </p>
+                    </section>
                 </div>
             </div>
         </div>
@@ -357,8 +700,7 @@
     <!-- Footer -->
     <footer class="app-footer">
         <div class="footer-content">
-            <span class="footer-text">Proxen • © 2026 • Mohammed Siddiq</span>
-            <span class="footer-text muted">xensenx--Github</span>
+            <span class="footer-text">Proxen • © 2026 • <a href="https://github.com/xensenx" target="_blank" class="footer-link">xensenx</a></span>
         </div>
     </footer>
 

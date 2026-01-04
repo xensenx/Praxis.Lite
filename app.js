@@ -40,7 +40,16 @@ const App = {
             testModal: document.getElementById('test-modal'),
             testApiInput: document.getElementById('test-api-input'),
             testBtn: document.getElementById('test-btn'),
-            testResults: document.getElementById('test-results')
+            testResults: document.getElementById('test-results'),
+            technicalModal: document.getElementById('technical-modal'),
+            privacyModal: document.getElementById('privacy-modal'),
+            threatModal: document.getElementById('threat-modal'),
+            changelogModal: document.getElementById('changelog-modal'),
+            versionBtn: document.getElementById('version-btn'),
+            transparencyToggle: document.getElementById('transparency-toggle'),
+            transparencyContent: document.getElementById('transparency-content'),
+            scopeToggle: document.getElementById('scope-toggle'),
+            scopeContent: document.getElementById('scope-content')
         };
 
         // Load saved state
@@ -64,6 +73,11 @@ const App = {
         // Event listeners
         this.DOM.resetBtn.addEventListener('click', () => this.reset());
         this.DOM.helpBtn.addEventListener('click', () => this.toggleSuggestions());
+        this.DOM.versionBtn.addEventListener('click', () => this.showChangelog());
+        
+        // Collapsible sections
+        this.DOM.transparencyToggle.addEventListener('click', () => this.toggleTransparency());
+        this.DOM.scopeToggle.addEventListener('click', () => this.toggleScope());
         
         this.DOM.apiKeyInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') this.saveApiKey();
@@ -176,7 +190,7 @@ const App = {
         }
     },
 
-    openTestModal() {
+    showTestModal() {
         this.DOM.testModal.classList.remove('hidden');
         this.DOM.testResults.classList.add('hidden');
         this.DOM.testResults.innerHTML = '';
@@ -192,6 +206,64 @@ const App = {
 
     closeTestModal() {
         this.DOM.testModal.classList.add('hidden');
+    },
+
+    showTechnicalDetails() {
+        this.DOM.technicalModal.classList.remove('hidden');
+    },
+
+    closeTechnicalModal() {
+        this.DOM.technicalModal.classList.add('hidden');
+    },
+
+    showPrivacy() {
+        this.DOM.privacyModal.classList.remove('hidden');
+    },
+
+    closePrivacyModal() {
+        this.DOM.privacyModal.classList.add('hidden');
+    },
+
+    showThreatModel() {
+        this.DOM.threatModal.classList.remove('hidden');
+    },
+
+    closeThreatModal() {
+        this.DOM.threatModal.classList.add('hidden');
+    },
+
+    showChangelog() {
+        this.DOM.changelogModal.classList.remove('hidden');
+    },
+
+    closeChangelogModal() {
+        this.DOM.changelogModal.classList.add('hidden');
+    },
+
+    toggleTransparency() {
+        const content = this.DOM.transparencyContent;
+        const icon = this.DOM.transparencyToggle.querySelector('.collapse-icon');
+        
+        if (content.classList.contains('expanded')) {
+            content.classList.remove('expanded');
+            icon.textContent = '▼';
+        } else {
+            content.classList.add('expanded');
+            icon.textContent = '▲';
+        }
+    },
+
+    toggleScope() {
+        const content = this.DOM.scopeContent;
+        const icon = this.DOM.scopeToggle.querySelector('.scope-toggle-icon');
+        
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            icon.textContent = '▲';
+        } else {
+            content.classList.add('hidden');
+            icon.textContent = '▼';
+        }
     },
 
     async runAPITest() {
