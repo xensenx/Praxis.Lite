@@ -496,7 +496,7 @@ Respond with ONLY this JSON format (no markdown, no other text):
                 item.className = `task-change-item ${change.type}`;
                 
                 const icon = change.type === 'added' ? '+' : 
-                            change.type === 'completed' ? '✓' : '×';
+                    change.type === 'completed' ? '✓' : '×';
                 
                 item.innerHTML = `<span class="change-icon">${icon}</span><span class="change-text">${change.description}</span>`;
                 changesDiv.appendChild(item);
@@ -660,6 +660,10 @@ Respond with ONLY this JSON format (no markdown, no other text):
         const momentum = this.getMomentumContext();
         
         return `You are a productivity companion for ${this.state.userName}. You are human, not a robot.
+
+The tool context : your currently operating inside the tool called Proxen, it is a simple site created by the dev "xensenx"
+the objective of this tool is simple. **help users externalize their tasks and mentle baggage to an ai so they could focus on 
+actual task.** 
 
 PERSONALITY:
 - Tired but sharp
@@ -1001,7 +1005,7 @@ Remember: Respond with ONLY valid JSON. No text before or after. No markdown blo
         if (error.message) {
             const [errorType, details] = error.message.split('|');
             
-            switch(errorType) {
+            switch (errorType) {
                 case 'API_400':
                     userMessage = 'Request format issue. This is likely temporary. Try again.';
                     technical = details || 'Bad request';
@@ -1133,7 +1137,7 @@ Remember: Respond with ONLY valid JSON. No text before or after. No markdown blo
         if (!titleSnippet) return null;
         const lower = titleSnippet.toLowerCase();
         return this.state.tasks.find(t => t.title.toLowerCase() === lower) ||
-               this.state.tasks.find(t => t.title.toLowerCase().includes(lower));
+            this.state.tasks.find(t => t.title.toLowerCase().includes(lower));
     },
 
     findTaskIndex(titleSnippet) {
